@@ -1,0 +1,7 @@
+.lista_pedidos{
+    padding: 0px;
+}
+.lista_pedidos li{
+    list-style: none;
+    margin: 20px;
+}

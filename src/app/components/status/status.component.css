@@ -1,0 +1,180 @@
+/* Container do progresso */
+.progress-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative; /* Necessário para os conectores */
+    justify-content: center;
+  }
+  
+  /* Item de status */
+  .status-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* Colocar o texto abaixo do círculo */
+    position: relative;
+    text-align: center;
+    margin: 0px 42px 0px 52px;
+  }
+  
+  /* Círculo de status */
+  .status-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+    background-color: grey; /* Cor padrão para todos os círculos */
+    border: 2px solid #ccc;
+    position: relative;
+    z-index: 1; /* Garantir que os círculos fiquem acima dos conectores */
+  }
+  
+  /* Conectores entre os círculos */
+  .connector {
+    width: 100px;
+    height: 2px;
+    background-color: #ccc;
+    position: absolute;
+    top: 50%; /* Posicionar na metade do círculo */
+    left: 100%; /* Alinhar o conector à direita do círculo */
+    transform: translateY(-50%); /* Ajuste para que a linha fique no meio verticalmente */
+  }
+  
+  /* Estilos para os status */
+  .status-label {
+    margin-top: 5px; /* Distância entre o círculo e o texto */
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Estilos adicionais para os ícones */
+  .fa-check {
+    color: white;
+  }/* Container do progresso */
+.progress-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative; /* Necessário para os conectores */
+    justify-content: center;
+  }
+  
+  /* Item de status */
+  .status-item {
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* Colocar o texto abaixo do círculo */
+    position: relative;
+    text-align: center;
+    margin: 0px 42px 0px 52px;
+  }
+  
+  /* Círculo de status */
+  .status-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: white;
+    background-color: grey; /* Cor padrão para todos os círculos */
+    border: 2px solid #ccc;
+    position: relative;
+    z-index: 1; /* Garantir que os círculos fiquem acima dos conectores */
+  }
+  
+  /* Conectores entre os círculos */
+  .connector {
+    width: 100px;
+    height: 2px;
+    background-color: #ccc;
+    position: absolute;
+    top: 37%; /* Posicionar na metade do círculo */
+    left: 100%; /* Alinhar o conector à direita do círculo */
+    transform: translateY(-50%); /* Ajuste para que a linha fique no meio verticalmente */
+  }
+  
+  /* Estilos para os status */
+  .status-label {
+    margin-top: 5px; /* Distância entre o círculo e o texto */
+    font-size: 14px;
+    color: #333;
+  }
+  
+  /* Estilos adicionais para os ícones */
+  .fa-check {
+    color: white;
+  }
+  
+  .fa-spinner {
+    color: white;
+  }
+  
+  .fa-times {
+    color: white;
+  }
+  
+  .fa-exclamation {
+    color: white;
+  }
+  
+  /* Estilos para mobile - Adaptação para telas pequenas */
+  @media (max-width: 768px) {
+    /* Container do progresso */
+    .progress-container {
+      flex-direction: column; /* Colocar os itens na coluna (vertical) */
+      justify-content: start;
+      align-items: start;
+    }
+  
+    /* Item de status */
+    .status-item {
+      margin: 20px 0; /* Ajuste de margem para espaçamento vertical */
+      flex-direction: row; /* Colocar o texto ao lado do círculo */
+      justify-content: flex-start; /* Alinhar os itens à esquerda */
+    }
+  
+    /* Círculo de status */
+    .status-circle {
+      width: 30px;  /* Reduzir o tamanho do círculo */
+      height: 30px; /* Reduzir o tamanho do círculo */
+      font-size: 16px; /* Ajuste do tamanho do ícone */
+    }
+  
+    /* Conectores entre os círculos */
+    .connector {
+        width: 2px;
+        height: 99px;
+        background-color: #ccc;
+        position: absolute;
+        top: 102%;
+        left: 12%;
+        /* transform: translateY(-168%);
+    }
+  
+    /* Ajuste do texto */
+    .status-label {
+      margin-left: 10px; /* Distância entre o círculo e o texto */
+      font-size: 12px; /* Reduzir o tamanho da fonte */
+    }
+  }
+  
+  
+  .fa-spinner {
+    color: white;
+  }
+  
+  .fa-times {
+    color: white;
+  }
+  
+  .fa-exclamation {
+    color: white;
+  }
+}

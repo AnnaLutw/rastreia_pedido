@@ -1,0 +1,8 @@
+#document{
+    width: 50%;
+}
+@media (max-width: 768px) {
+    #document{
+        width: 80%;
+    }
+}
