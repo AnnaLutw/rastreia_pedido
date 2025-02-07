@@ -1,0 +1,48 @@
+
+.header{
+    border: solid 1px grey;
+}
+.table_item:hover{
+    background-color: grey;
+}
+.table_item:nth-child(even) {
+    background-color: #f2f2f2; /* Cinza claro */
+  }
+  
+  .table_item:nth-child(odd) {
+    background-color: #e0e0e0; /* Cinza um pouco mais escuro */
+  }
+  
+.previsao{
+  color: green;
+}
+
+@media (max-width: 768px) {
+    #produto-info{
+        margin-top: 20px;
+    }
+}
+@media (max-width: 768px) {
+    .tabela_status .header {
+      display: none; /* Esconde os cabeçalhos no mobile */
+    }
+  
+    .table_item {
+      display: flex;
+      flex-direction: column; /* Cada item vira um bloco */
+      padding: 10px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+      background-color: #f9f9f9;
+    }
+  
+    .table_item div {
+      padding: 5px 0;
+    }
+  
+    #data_hora::before { content: "Data/Hora: "; font-weight: bold; }
+    #status::before { content: "Eventos: "; font-weight: bold; }
+    #detalhes::before { content: "Detalhes: "; font-weight: bold; }
+    #obs::before { content: "Obs: "; font-weight: bold; }
+  }
+  

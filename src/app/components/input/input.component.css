@@ -1,8 +1,13 @@
 #document{
-    width: 50%;
+    width: 83%;
 }
+
 @media (max-width: 768px) {
+    #input_session{
+        min-width: 90%;
+    }
     #document{
-        width: 80%;
+       width: 100%;
+       margin-bottom: 10px;
     }
 }

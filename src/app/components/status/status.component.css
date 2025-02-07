@@ -73,6 +73,7 @@
     margin: 0px 42px 0px 52px;
   }
   
+
   /* Círculo de status */
   .status-circle {
     width: 40px;
@@ -89,16 +90,25 @@
     z-index: 1; /* Garantir que os círculos fiquem acima dos conectores */
   }
   
+  .status-circle.active {
+    background-color: #15b100; /* Cor para status concluído */
+  }
+
   /* Conectores entre os círculos */
   .connector {
     width: 100px;
     height: 2px;
-    background-color: #ccc;
+    background-color: grey;
     position: absolute;
     top: 37%; /* Posicionar na metade do círculo */
     left: 100%; /* Alinhar o conector à direita do círculo */
     transform: translateY(-50%); /* Ajuste para que a linha fique no meio verticalmente */
   }
+  
+  .status-item:has(.status-circle.active) .connector {
+    background-color: #15b100;
+  }
+  
   
   /* Estilos para os status */
   .status-label {

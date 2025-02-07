@@ -2,15 +2,15 @@
 <div class="container text-center">
     <app-bloco-um></app-bloco-um>
 
+    <div class="ms-sm-5 me-sm-5">
+        <ul class="lista_pedidos">
+            <li *ngFor="let pedido of pedidos">
+                <app-card-pedido [pedido]="pedido"></app-card-pedido>
+            </li>
+        </ul>
+    </div>
+   
+   
 
-    <ul class="lista_pedidos">
-        <li>
-            <app-card-pedido></app-card-pedido>
-        </li>
-       
-    </ul>
-
-
-    <app-footer></app-footer> 
-    
+    <app-footer></app-footer>
 </div>

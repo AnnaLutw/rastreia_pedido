@@ -1,40 +1,65 @@
 <div class="card">
-    <div class="card-header d-flex justify-content-between">
-      <h5>Pedido : LU-1409970438718881</h5>
-      <h5>Codigo Rastreio : ETM12345</h5>
+  <div class="card-header d-flex justify-content-between">
+    <h5>Pedido : {{ pedido?.marketplace_pedido }}</h5>
+    <h5>Codigo Rastreio : ETM{{ pedido?.id_nr_nf }}</h5>
+  </div>
+  <div class="card-body">
+    <div class="row justify-content-between">
+      <div class="text-start col-lg-3 col-12">
+        <h6 class="card-text previsao" >
+          <strong>Previsão entrega:</strong> {{ pedido?.trackingInfo?.content?.estimated_delivery_date_iso | date:'dd/MM/yyyy' }}
+        </h6>
+        <h6 class="card-text">
+          <strong>Plataforma:</strong> {{ pedido?.trackingInfo?.content?.sales_channel }}
+        </h6>
+        <h6 class="card-text">
+          <strong>Entregar para: </strong> 
+          {{ pedido?.trackingInfo?.content?.end_customer?.first_name }} 
+          {{ pedido?.trackingInfo?.content?.end_customer?.last_name }}
+        </h6>
+      </div>
+      <div id="transportadora-info" class="col-lg-2 col-12">
+        <p><strong>Entregue por:</strong> </p> 
+        <img width="100" [src]="getTransportadoraLogo()" alt="Imagem da transportadora" />
+      </div>
       
+      <div id="produto-info" class="col-lg-3 col-12">
+        <img width="100" [src]="pedido?.imagem1" alt="Imagem do produto" />
+        <p id="nome-produto" class="card-title">{{ pedido?.descricao_fiscal }}</p>
+      </div>
     </div>
-    <div class="card-body">
-      <div class="d-flex justify-content-between">
-        <div id="produto-info">
-          <img width="50" src="https://m.media-amazon.com/images/I/51XA+9qSAhL._AC_SL1000_.jpg" />
-          <h5 id="nome-produto" class="card-title">Fogão 5 bocas ...</h5>
 
-         
+    <p class="d-inline-flex gap-1 mb-0">
+      <a class="btn btn-success mb-0" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        Veja onde está
+      </a>
+    </p>
+
+    <div class="collapse mt-3" id="collapseExample">
+      <div class="card card-body">
+        <app-status [pedido]="pedido"></app-status>
+
+        
+        <div class="tabela_status mt-5">
+          <div class="header row p-2">
+            <div class="header_item col-lg-3 col-12">Data / Hora</div>
+            <div class="header_item col-lg-3 col-12">Eventos</div>
+            <div class="header_item col-lg-3 col-12">Detalhes</div>
+            <div class="header_item col-lg-3 col-12">Obs.</div>
+          </div>
+
+          <div *ngFor="let status of getUniqueStatus(pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array)" class="row table_item p-2">
+            <div id="data_hora" class="col-lg-3 col-12">{{ status?.created_iso | date:'dd/MM/yyyy HH:mm' }}</div>
+            <div id="status" class="col-lg-3 col-12">{{ status?.shipment_order_volume_state_localized }}</div>
+            <p id="detalhes" class="col-lg-3 col-12">
+              - {{ status?.shipment_volume_micro_state.description.replace('Aguarde os demais status de rastreamento.', '') }}
+            </p>
+            <div id="obs" class="col-lg-3 col-12">-</div>
+          </div>
+          
         </div>
-        <div>
-          <h6 class="card-text">Previsão entrega:</h6>
-          <p class="card-text">20/03/2025</p>
-  
-        </div>
-        <div>
-          <h6  class="card-text">Plataforma:</h6>
-          <p id="plataforma" class="card-text">Casas Bahia</p>
-  
-        </div>
+
       </div>
-     
-
-      <p class="d-inline-flex gap-1">
-        <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            Veja onde está
-        </a>
-      </p>
-      <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-          <app-status></app-status>
-        </div>
-      </div>
-
     </div>
   </div>
+</div>
