@@ -45,3 +45,8 @@ Thumbs.db
 
 .env
 package-lock.json 
+
+# Ignorar arquivos de ambiente
+src/environment.ts
+src/environment.prod.ts
+
