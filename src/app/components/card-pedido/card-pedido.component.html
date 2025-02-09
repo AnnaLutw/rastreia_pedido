@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card mt-2">
   <div class="card-header d-flex justify-content-between">
     <h5>Pedido : {{ pedido?.marketplace_pedido }}</h5>
     <h5>Codigo Rastreio : ETM{{ pedido?.id_nr_nf }}</h5>
@@ -21,25 +21,37 @@
       <div id="transportadora-info" class="col-lg-2 col-12">
         <p><strong>Entregue por:</strong> </p> 
         <img width="100" [src]="getTransportadoraLogo()" alt="Imagem da transportadora" />
+
+        <p class="d-inline-flex gap-1 mb-0 mt-3">
+          <a 
+            class="btn btn-success mb-0" 
+            data-bs-toggle="collapse" 
+            [attr.href]="'#collapse-' + pedido?.id_nr_nf" 
+            role="button" 
+            [attr.aria-controls]="'collapse-' + pedido?.id_nr_nf">
+            Veja onde está
+          </a>
+        </p>
       </div>
       
-      <div id="produto-info" class="col-lg-3 col-12">
-        <img width="100" [src]="pedido?.imagem1" alt="Imagem do produto" />
-        <p id="nome-produto" class="card-title">{{ pedido?.descricao_fiscal }}</p>
+      <div  class="col-lg-3 col-12">
+        <div class="d-flex">
+          <div id="produto-info"  *ngFor="let produto of pedido?.produtos">
+            <img width="100" [src]="produto?.imagem1" alt="Imagem do produto" />
+            <small id="nome-produto" class="card-title">{{ produto?.descricao_fiscal }}</small>
+          </div>
+        </div>
+       
       </div>
+     
     </div>
 
-    <p class="d-inline-flex gap-1 mb-0">
-      <a class="btn btn-success mb-0" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Veja onde está
-      </a>
-    </p>
-
-    <div class="collapse mt-3" id="collapseExample">
+    
+    
+    <div class="collapse mt-3" [id]="'collapse-' + pedido?.id_nr_nf">
       <div class="card card-body">
         <app-status [pedido]="pedido"></app-status>
-
-        
+    
         <div class="tabela_status mt-5">
           <div class="header row p-2">
             <div class="header_item col-lg-3 col-12">Data / Hora</div>
@@ -47,7 +59,7 @@
             <div class="header_item col-lg-3 col-12">Detalhes</div>
             <div class="header_item col-lg-3 col-12">Obs.</div>
           </div>
-
+    
           <div *ngFor="let status of getUniqueStatus(pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array)" class="row table_item p-2">
             <div id="data_hora" class="col-lg-3 col-12">{{ status?.created_iso | date:'dd/MM/yyyy HH:mm' }}</div>
             <div id="status" class="col-lg-3 col-12">{{ status?.shipment_order_volume_state_localized }}</div>
@@ -56,10 +68,9 @@
             </p>
             <div id="obs" class="col-lg-3 col-12">-</div>
           </div>
-          
         </div>
-
       </div>
     </div>
+    
   </div>
 </div>

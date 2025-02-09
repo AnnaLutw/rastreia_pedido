@@ -44,9 +44,32 @@ app.get('/api/pedido/:cpf_cnpj', async (req, res) => {
     console.log('Resultado da query:', result);
 
     if (result.length > 0) {
-      res.json({ pedidos: result });
+      // Agrupar por `chavenfe`
+      const pedidosAgrupados = result.reduce((acc, item) => {
+        const { chavenfe, marketplace_pedido, data_emissao, transportadora_ecommerce, id_nr_nf, descricao_fiscal, imagem1 } = item;
+        
+        if (!acc[chavenfe]) {
+          acc[chavenfe] = {
+            chavenfe,
+            marketplace_pedido,
+            data_emissao,
+            transportadora_ecommerce,
+            id_nr_nf,
+            produtos: []
+          };
+        }
+
+        acc[chavenfe].produtos.push({
+          descricao_fiscal,
+          imagem1
+        });
+
+        return acc;
+      }, {});
+
+      res.json({ pedidos: Object.values(pedidosAgrupados) });
     } else {
-      res.status(404).json({ message: 'Chave não encontrado para este CPF/CNPJ' });
+      res.status(404).json({ message: 'Nenhum pedido encontrado para este CPF/CNPJ' });
     }
   } catch (err) {
     console.error('Erro ao executar a query:', err);

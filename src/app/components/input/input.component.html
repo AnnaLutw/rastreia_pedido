@@ -1,16 +1,14 @@
 <div class="mb-3 row justify-content-center m-0">
-  <label for="exampleInputEmail1" class="form-label">Digite seu CPF/CNPJ</label>
+  <label for="document" class="form-label">Digite seu CPF/CNPJ</label>
   <div id="input_session" class="row col-lg-6 col-12">
     <input 
-    type="text" 
-    class="form-control col-lg-9 col-12" 
-    id="document" 
-    aria-describedby="cpf"
-    [(ngModel)]="documento"  
-  >
-  <button (click)="onSubmit()" class="btn btn-primary col-lg-2 col-12">Enviar</button>
+      type="text" 
+      class="form-control col-lg-9 col-12" 
+      id="document" 
+      [(ngModel)]="documento"
+      [mask]="mask"
+      (ngModelChange)="onChangeDocumento()"
+    >
+    <button (click)="onSubmit()" class="btn btn-primary col-lg-2 col-12">Enviar</button>
   </div>
-
 </div>
-
-
