@@ -49,6 +49,14 @@ max-width: 100%; /* Ajuste conforme necessário */
     padding: 5px 0;
   }
 
+  .card-header{
+    flex-direction: column;
+  }
+
+  p{
+    margin-bottom: 2px;
+  }
+
   #data_hora::before { content: "Data/Hora: "; font-weight: bold; }
   #status::before { content: "Eventos: "; font-weight: bold; }
   #detalhes::before { content: "Detalhes: "; font-weight: bold; }

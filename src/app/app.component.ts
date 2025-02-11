@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, ActivatedRoute } from '@angular/router';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FooterComponent } from "./components/footer/footer.component";
 import { BlocoUmComponent } from "./components/bloco-um/bloco-um.component";
@@ -28,9 +28,11 @@ export class AppComponent {
   pedidos: any[] = [];
 
   constructor(private pedidoService: PedidoService) {
-    // Escutando mudanças no serviço
+    // Atualiza os pedidos sempre que o serviço notificar mudanças
     this.pedidoService.pedidos$.subscribe(novosPedidos => {
       this.pedidos = novosPedidos;
     });
   }
+  
+  
 }

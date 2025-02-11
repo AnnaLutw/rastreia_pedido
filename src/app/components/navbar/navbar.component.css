@@ -1,4 +1,16 @@
 nav {
     background-color: #108d00;
-    padding: 0px;
+    padding: 10px;
   }
+#veja-loja{
+  color: green;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  #veja-loja{
+    padding: 4px;
+  }
+}

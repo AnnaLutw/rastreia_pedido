@@ -1,12 +1,16 @@
-import { Component } from '@angular/core';
-import { InputComponent } from "../input/input.component";
+import { Component, OnInit } from '@angular/core';
+
+import { InputComponent } from '../input/input.component';
+import { RouterModule } from '@angular/router';
+
 
 @Component({
   selector: 'app-bloco-um',
-  imports: [InputComponent],
+  standalone: true,
+  imports: [InputComponent, RouterModule],
   templateUrl: './bloco-um.component.html',
-  styleUrl: './bloco-um.component.css'
+  styleUrls: ['./bloco-um.component.css']
 })
-export class BlocoUmComponent {
-
+export class BlocoUmComponent{
+  
 }

@@ -27,12 +27,13 @@ app.get('/api/pedido/:cpf_cnpj', async (req, res) => {
         ns.transportadora_ecommerce,
         ns.id_nr_nf,
         p.descricao_fiscal ,
-		    p.imagem1 
+		    p.imagem1,
+        ns.intelipost_order as codigo_rastreio
           FROM nota_saida ns
           JOIN cliente c ON c.id_cliente = ns.id_cliente
           join nota_saida_itens nsi on ns.id_nota_saida = nsi.id_nota_saida   
           join produto p on p.id_produto  = nsi.id_produto 
-          WHERE c.cpf = :cpf_cnpj
+          WHERE  (c.cpf = :cpf_cnpj OR ns.intelipost_order = :cpf_cnpj)
           AND ns.chavenfe <> ''
           AND ns.marketplace_pedido not like '%DEVOL%'`, // Usando = para comparação exata
       {
@@ -46,7 +47,7 @@ app.get('/api/pedido/:cpf_cnpj', async (req, res) => {
     if (result.length > 0) {
       // Agrupar por `chavenfe`
       const pedidosAgrupados = result.reduce((acc, item) => {
-        const { chavenfe, marketplace_pedido, data_emissao, transportadora_ecommerce, id_nr_nf, descricao_fiscal, imagem1 } = item;
+        const { chavenfe, marketplace_pedido, data_emissao, transportadora_ecommerce, id_nr_nf,codigo_rastreio, descricao_fiscal, imagem1 } = item;
         
         if (!acc[chavenfe]) {
           acc[chavenfe] = {
@@ -55,6 +56,7 @@ app.get('/api/pedido/:cpf_cnpj', async (req, res) => {
             data_emissao,
             transportadora_ecommerce,
             id_nr_nf,
+            codigo_rastreio,
             produtos: []
           };
         }

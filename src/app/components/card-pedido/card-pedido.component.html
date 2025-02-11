@@ -1,26 +1,36 @@
-<div class="card mt-2">
+<div class="spinner-border text-success d-none" id="spinner" role="status">
+  <span class="visually-hidden">Loading...</span>
+</div>
+<div class="card mt-2" id="card-pedidos">
   <div class="card-header d-flex justify-content-between">
-    <h5>Pedido : {{ pedido?.marketplace_pedido }}</h5>
-    <h5>Codigo Rastreio : ETM{{ pedido?.id_nr_nf }}</h5>
+    <p> <strong>Pedido :</strong> {{ pedido?.marketplace_pedido }}</p>
+    <p> <strong>Codigo Rastreio :</strong> ETM{{ pedido?.id_nr_nf }}</p>
   </div>
   <div class="card-body">
     <div class="row justify-content-between">
-      <div class="text-start col-lg-3 col-12">
-        <h6 class="card-text previsao" >
-          <strong>Previsão entrega:</strong> {{ pedido?.trackingInfo?.content?.estimated_delivery_date_iso | date:'dd/MM/yyyy' }}
-        </h6>
-        <h6 class="card-text">
+      <div class="text-start col-lg-5 col-12">
+        <p class="card-text previsao" >
+          <strong >Previsão entrega:</strong> {{ pedido?.trackingInfo?.content?.estimated_delivery_date_iso | date:'dd/MM/yyyy' }}
+        </p>
+        <p class="card-text d-none d-sm-block">
           <strong>Plataforma:</strong> {{ pedido?.trackingInfo?.content?.sales_channel }}
-        </h6>
-        <h6 class="card-text">
+        </p>
+        <p class="card-text d-none d-sm-block">
           <strong>Entregar para: </strong> 
           {{ pedido?.trackingInfo?.content?.end_customer?.first_name }} 
           {{ pedido?.trackingInfo?.content?.end_customer?.last_name }}
-        </h6>
+        </p>
+        <p class="card-text d-none d-sm-block">
+          <strong>Endereço de entrega: </strong> 
+          {{ pedido?.trackingInfo?.content?.end_customer?.shipping_address }} 
+          {{ pedido?.trackingInfo?.content?.end_customer?.shipping_city }}
+          {{ pedido?.trackingInfo?.content?.end_customer?.shipping_quarter }},
+          {{ pedido?.trackingInfo?.content?.end_customer?.shipping_state_code }}
+        </p>
       </div>
       <div id="transportadora-info" class="col-lg-2 col-12">
-        <p><strong>Entregue por:</strong> </p> 
-        <img width="100" [src]="getTransportadoraLogo()" alt="Imagem da transportadora" />
+        <p><strong class="d-none d-sm-block">Entregue por:</strong> </p> 
+        <img class="d-none d-sm-block" width="100" [src]="getTransportadoraLogo()" alt="Imagem da transportadora" />
 
         <p class="d-inline-flex gap-1 mb-0 mt-3">
           <a 
@@ -34,20 +44,15 @@
         </p>
       </div>
       
-      <div  class="col-lg-3 col-12">
-        <div class="d-flex">
-          <div id="produto-info"  *ngFor="let produto of pedido?.produtos">
+      <div class="col-lg-5 col-12">
+        <div class="row justify-content-center">
+          <div id="produto-info" class="col-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let produto of pedido?.produtos">
             <img width="100" [src]="produto?.imagem1" alt="Imagem do produto" />
             <small id="nome-produto" class="card-title">{{ produto?.descricao_fiscal }}</small>
           </div>
         </div>
-       
       </div>
-     
     </div>
-
-    
-    
     <div class="collapse mt-3" [id]="'collapse-' + pedido?.id_nr_nf">
       <div class="card card-body">
         <app-status [pedido]="pedido"></app-status>
@@ -60,7 +65,7 @@
             <div class="header_item col-lg-3 col-12">Obs.</div>
           </div>
     
-          <div *ngFor="let status of getUniqueStatus(pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array)" class="row table_item p-2">
+          <div *ngFor="let status of pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array" class="row table_item p-2">
             <div id="data_hora" class="col-lg-3 col-12">{{ status?.created_iso | date:'dd/MM/yyyy HH:mm' }}</div>
             <div id="status" class="col-lg-3 col-12">{{ status?.shipment_order_volume_state_localized }}</div>
             <p id="detalhes" class="col-lg-3 col-12">
