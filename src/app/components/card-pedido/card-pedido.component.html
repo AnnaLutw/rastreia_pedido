@@ -1,81 +1,86 @@
-<div class="spinner-border text-success d-none" id="spinner" role="status">
-  <span class="visually-hidden">Loading...</span>
-</div>
-<div class="card mt-2" id="card-pedidos">
-  <div class="card-header d-flex justify-content-between">
-    <p> <strong>Pedido :</strong> {{ pedido?.marketplace_pedido }}</p>
-    <p> <strong>Codigo Rastreio :</strong> ETM{{ pedido?.id_nr_nf }}</p>
+<div class="card mt-3 shadow-sm" id="card-pedidos">
+  <div class="card-header d-flex flex-column flex-md-row justify-content-between align-items-md-center bg-success text-white p-3">
+    <p class="mb-1 mb-md-0"><strong>Pedido:</strong> {{ pedido?.marketplace_pedido }}</p>
+    <p class="mb-0"><strong>Código de Rastreio:</strong> ETM{{ pedido?.id_nr_nf }}</p>
   </div>
-  <div class="card-body">
-    <div class="row justify-content-between">
-      <div class="text-start col-lg-5 col-12">
-        <p class="card-text previsao" >
-          <strong >Previsão entrega:</strong> {{ pedido?.trackingInfo?.content?.estimated_delivery_date_iso | date:'dd/MM/yyyy' }}
-        </p>
-        <p class="card-text d-none d-sm-block">
-          <strong>Plataforma:</strong> {{ pedido?.trackingInfo?.content?.sales_channel }}
-        </p>
-        <p class="card-text d-none d-sm-block">
-          <strong>Entregar para: </strong> 
-          {{ pedido?.trackingInfo?.content?.end_customer?.first_name }} 
-          {{ pedido?.trackingInfo?.content?.end_customer?.last_name }}
-        </p>
-        <p class="card-text d-none d-sm-block">
-          <strong>Endereço de entrega: </strong> 
-          {{ pedido?.trackingInfo?.content?.end_customer?.shipping_address }} 
-          {{ pedido?.trackingInfo?.content?.end_customer?.shipping_city }}
-          {{ pedido?.trackingInfo?.content?.end_customer?.shipping_quarter }},
-          {{ pedido?.trackingInfo?.content?.end_customer?.shipping_state_code }}
-        </p>
-      </div>
-      <div id="transportadora-info" class="col-lg-2 col-12">
-        <p><strong class="d-none d-sm-block">Entregue por:</strong> </p> 
-        <img class="d-none d-sm-block" width="100" [src]="getTransportadoraLogo()" alt="Imagem da transportadora" />
-
-        <p class="d-inline-flex gap-1 mb-0 mt-3">
-          <a 
-            class="btn btn-success mb-0" 
-            data-bs-toggle="collapse" 
-            [attr.href]="'#collapse-' + pedido?.id_nr_nf" 
-            role="button" 
-            [attr.aria-controls]="'collapse-' + pedido?.id_nr_nf">
-            Veja onde está
-          </a>
-        </p>
+  <div class="card-body p-4">
+    <div class="row align-items-center">
+      <!-- Informações do Pedido -->
+      <div class="col-lg-5 col-12 mb-3">
+        <p class="previsao"><strong>Previsão de Entrega:</strong> {{ pedido?.trackingInfo?.content?.estimated_delivery_date_iso | date:'dd/MM/yyyy' }}</p>
+        <p><strong>Plataforma:</strong> {{ pedido?.trackingInfo?.content?.sales_channel }}</p>
+        <p><strong>Entregar para:</strong> {{ pedido?.trackingInfo?.content?.end_customer?.first_name }} {{ pedido?.trackingInfo?.content?.end_customer?.last_name }}</p>
+        <p><strong>Endereço:</strong> {{ pedido?.trackingInfo?.content?.end_customer?.shipping_address }}, {{ pedido?.trackingInfo?.content?.end_customer?.shipping_city }} - {{ pedido?.trackingInfo?.content?.end_customer?.shipping_state_code }}</p>
       </div>
       
-      <div class="col-lg-5 col-12">
+      <!-- Transportadora -->
+      <div class="col-lg-2 col-12 text-center mb-3">
+        <p><strong>Entregue por:</strong></p>
+        <img width="100" [src]="getTransportadoraLogo()" alt="Imagem da transportadora" class="rounded shadow-sm" />
+      </div>
+      
+      <!-- Produtos -->
+      <div class="col-lg-5 col-12 text-center">
         <div class="row justify-content-center">
-          <div id="produto-info" class="col-12 col-sm-6 col-md-4 col-lg-4" *ngFor="let produto of pedido?.produtos">
-            <img width="100" [src]="produto?.imagem1" alt="Imagem do produto" />
-            <small id="nome-produto" class="card-title">{{ produto?.descricao_fiscal }}</small>
+          <div class="col-6 col-sm-4 col-md-3 col-lg-3 mb-2" *ngFor="let produto of pedido?.produtos">
+            <img class="img-fluid rounded shadow-sm" [src]="produto?.imagem1" alt="Produto" />
+            <small id="nome-produto" class="d-block text-muted mt-1">{{ produto?.descricao_fiscal }}</small>
           </div>
         </div>
       </div>
     </div>
-    <div class="collapse mt-3" [id]="'collapse-' + pedido?.id_nr_nf">
-      <div class="card card-body">
-        <app-status [pedido]="pedido"></app-status>
-    
-        <div class="tabela_status mt-5">
-          <div class="header row p-2">
-            <div class="header_item col-lg-3 col-12">Data / Hora</div>
-            <div class="header_item col-lg-3 col-12">Eventos</div>
-            <div class="header_item col-lg-3 col-12">Detalhes</div>
-            <div class="header_item col-lg-3 col-12">Obs.</div>
+      <div class="col-12">
+        <div class="col-12 ">
+          <app-status [pedido]="pedido"></app-status>
+          <div class="mt-3">
+            <a class="btn btn-success" data-bs-toggle="collapse" [attr.href]="'#collapse-' + pedido?.id_nr_nf" role="button" [attr.aria-controls]="'collapse-' + pedido?.id_nr_nf">
+              Ver detalhes
+            </a>
           </div>
-    
-          <div *ngFor="let status of pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array" class="row table_item p-2">
-            <div id="data_hora" class="col-lg-3 col-12">{{ status?.created_iso | date:'dd/MM/yyyy HH:mm' }}</div>
-            <div id="status" class="col-lg-3 col-12">{{ status?.shipment_order_volume_state_localized }}</div>
-            <p id="detalhes" class="col-lg-3 col-12">
-              - {{ status?.shipment_volume_micro_state.description.replace('Aguarde os demais status de rastreamento.', '') }}
-            </p>
-            <div id="obs" class="col-lg-3 col-12">-</div>
+      </div>
+    <!-- Rastreio Detalhado -->
+    <div class="collapse mt-2" [id]="'collapse-' + pedido?.id_nr_nf">
+      <div class="card card-body border-0 shadow-sm">
+        
+        <div class="tabela_status mt-4">
+          <div class="row bg-light p-2 fw-bold d-none d-md-flex">
+            <div class="col-lg-3">Data / Hora</div>
+            <div class="col-lg-3">Eventos</div>
+            <div class="col-lg-3">Detalhes</div>
+            <div class="col-lg-3">Observação</div>
           </div>
+        
+          <div *ngIf="pedido?.trackingInfo?.content?.shipment_order_volume_array?.[0]?.shipment_order_volume_state_history_array?.length > 0; else noData">
+            <div *ngFor="let status of pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array" 
+                 class="row p-2 border-bottom">
+              
+              <div class="col-lg-3 col-12" id="data_hora">
+                {{ status?.created_iso ? (status.created_iso | date:'dd/MM/yyyy HH:mm') : 'Sem data' }}
+              </div>
+              
+              <div class="col-lg-3 col-12" id="status">
+                {{ status?.shipment_order_volume_state_localized || 'Sem status' }}
+              </div>
+              
+              <div class="col-lg-3 col-12" id="detalhes">
+                - {{ status?.shipment_volume_micro_state?.description?.replace('Aguarde os demais status de rastreamento.', '') || 'Sem detalhes' }}
+              </div>
+              
+              <div class="col-lg-3 col-12" id="obs">
+                {{ status?.extra?.[0]?.freeText?.replace('(SSWMOBILE)', '') || 'Sem observação' }}
+              </div>
+              
+            </div>
+          </div>
+        
+          <ng-template #noData>
+            <div class="row p-2">
+              <div class="col text-center text-muted">Nenhum status disponível.</div>
+            </div>
+          </ng-template>
         </div>
+        
       </div>
     </div>
-    
   </div>
 </div>

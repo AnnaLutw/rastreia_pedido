@@ -1,0 +1,6 @@
+<div  *ngIf="mostrarModal" class="modal">
+    <div class="modal-content align-items-center modal-nao-encontrou" >
+      <p>{{ erroMensagem }}</p>
+      <button (click)="fecharModal()" class="btn btn-success col-lg-2 col-12">Fechar</button>
+    </div>
+  </div>

@@ -34,6 +34,7 @@ export class ApiService {
                           }>(url).pipe(
       switchMap(response => {
         const pedidos = response.pedidos; 
+        
         if (!pedidos || pedidos.length === 0) {
           return throwError(() => new Error('Nenhum pedido encontrado.'));
         }

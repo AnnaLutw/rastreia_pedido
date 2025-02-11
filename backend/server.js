@@ -22,25 +22,26 @@ app.get('/api/pedido/:cpf_cnpj', async (req, res) => {
 
     const result = await sequelize.query(
       `SELECT ns.chavenfe,
-        ns.marketplace_pedido ,
-        ns.data_emissao,
-        ns.transportadora_ecommerce,
-        ns.id_nr_nf,
-        p.descricao_fiscal ,
-		    p.imagem1,
-        ns.intelipost_order as codigo_rastreio
-          FROM nota_saida ns
-          JOIN cliente c ON c.id_cliente = ns.id_cliente
-          join nota_saida_itens nsi on ns.id_nota_saida = nsi.id_nota_saida   
-          join produto p on p.id_produto  = nsi.id_produto 
-          WHERE  (c.cpf = :cpf_cnpj OR ns.intelipost_order = :cpf_cnpj)
-          AND ns.chavenfe <> ''
-          AND ns.marketplace_pedido not like '%DEVOL%'`, // Usando = para comparação exata
+          ns.marketplace_pedido,
+          ns.data_emissao,
+          ns.transportadora_ecommerce,
+          ns.id_nr_nf,
+          p.descricao_fiscal,
+          p.imagem1,
+          ns.intelipost_order as codigo_rastreio
+        FROM nota_saida ns
+        JOIN cliente c ON c.id_cliente = ns.id_cliente
+        JOIN nota_saida_itens nsi ON ns.id_nota_saida = nsi.id_nota_saida   
+        JOIN produto p ON p.id_produto = nsi.id_produto 
+        WHERE (c.cpf = :cpf_cnpj OR ns.intelipost_order = :cpf_cnpj)
+        AND ns.chavenfe <> ''
+        AND LOWER(ns.marketplace_pedido) NOT LIKE '%!_%' ESCAPE '!'`, // Define '!' como escape
       {
         type: Sequelize.QueryTypes.SELECT,
         replacements: { cpf_cnpj: cpf_cnpj } // Passando o valor diretamente
       }
     );
+    
 
     console.log('Resultado da query:', result);
 
@@ -71,7 +72,7 @@ app.get('/api/pedido/:cpf_cnpj', async (req, res) => {
 
       res.json({ pedidos: Object.values(pedidosAgrupados) });
     } else {
-      res.status(404).json({ message: 'Nenhum pedido encontrado para este CPF/CNPJ' });
+      res.json({ pedidos: [], message: 'CPF/CNPJ não encontrado' }); 
     }
   } catch (err) {
     console.error('Erro ao executar a query:', err);

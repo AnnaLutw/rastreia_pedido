@@ -1,59 +1,29 @@
-# RastreiaPedido
+# 🚀 Plataforma de Rastreamento de Pedidos
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+## 📌 Sobre o Projeto
+Este projeto é uma plataforma web desenvolvida para rastrear pedidos de múltiplos marketplaces em um único local. Ele permite que os usuários consultem o status de suas entregas de maneira prática e centralizada.
 
-## Development server
+## 🛠️ Tecnologias Utilizadas
+- **Frontend:** Angular
+- **Backend:** Node.js, Express
+- **Banco de Dados:** PostgreSQL
+- **APIs:** Intelipost (para rastreamento de pedidos)
+- **Bibliotecas e Ferramentas:**
+  - TypeORM (para manipulação de dados no PostgreSQL)
+  - Axios (para requisições de APIs dos marketplaces)
+  - Bootstrap/Tailwind (para estilização)
 
-To start a local development server, run:
+## 🔧 Funcionalidades
+- 📦 Consulta de status de pedidos em diversos marketplaces
+- 🔍 Busca rápida por cpf ou cnpj do cliente
+- 🛒 Integração com múltiplas plataformas de e-commerce
 
+
+### 4️⃣ Inicie o Servidor
 ```bash
-ng serve
+npm start
 ```
+O backend estará rodando em `http://localhost:3000`
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 📮 Contato
+Caso tenha dúvidas ou sugestões, entre em contato pelo email: [analuizasousa331@gmail.com](mailto:seu-email@empresa.com)

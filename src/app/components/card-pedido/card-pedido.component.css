@@ -1,10 +1,15 @@
-
-.header{
+.header {
   border: solid 1px grey;
+  background-color: #f8f9fa;
+  font-weight: bold;
+  padding: 10px;
 }
-.table_item:hover{
-  background-color: grey;
+
+.table_item:hover {
+  background-color: #b0b0b0;
+  transition: background-color 0.3s ease-in-out;
 }
+
 .table_item:nth-child(even) {
   background-color: #f2f2f2; /* Cinza claro */
 }
@@ -13,25 +18,27 @@
   background-color: #e0e0e0; /* Cinza um pouco mais escuro */
 }
 
-.previsao{
-color: green;
+.previsao {
+  color: green;
+  font-weight: bold;
 }
 
 #nome-produto {
-display: -webkit-box;
--webkit-line-clamp: 2; /* Número de linhas desejadas */
--webkit-box-orient: vertical;
-overflow: hidden;
-max-width: 100%; /* Ajuste conforme necessário */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Mantém no máximo 2 linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3.2em; /* Ajuste conforme o tamanho da fonte (1.6em por linha) */
+  line-height: 1.6em;
+  word-break: break-word;
 }
 
-
 @media (max-width: 768px) {
-  #produto-info{
-      margin-top: 20px;
+  #produto-info {
+    margin-top: 20px;
   }
-}
-@media (max-width: 768px) {
+
   .tabela_status .header {
     display: none; /* Esconde os cabeçalhos no mobile */
   }
@@ -43,22 +50,42 @@ max-width: 100%; /* Ajuste conforme necessário */
     border: 1px solid #ddd;
     margin-bottom: 10px;
     background-color: #f9f9f9;
+    border-radius: 5px;
   }
 
   .table_item div {
     padding: 5px 0;
   }
 
-  .card-header{
+  .card-header {
     flex-direction: column;
   }
 
-  p{
+  p {
     margin-bottom: 2px;
   }
 
-  #data_hora::before { content: "Data/Hora: "; font-weight: bold; }
-  #status::before { content: "Eventos: "; font-weight: bold; }
-  #detalhes::before { content: "Detalhes: "; font-weight: bold; }
-  #obs::before { content: "Obs: "; font-weight: bold; }
+  #data_hora::before {
+    content: "Data/Hora: ";
+    font-weight: bold;
+    color: #007bff;
+  }
+
+  #status::before {
+    content: "Eventos: ";
+    font-weight: bold;
+    color: #28a745;
+  }
+
+  #detalhes::before {
+    content: "Detalhes: ";
+    font-weight: bold;
+    color: #6c757d;
+  }
+
+  #obs::before {
+    content: "Obs: ";
+    font-weight: bold;
+    color: #dc3545;
+  }
 }

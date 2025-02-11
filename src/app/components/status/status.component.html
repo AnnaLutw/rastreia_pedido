@@ -1,10 +1,9 @@
 <div class="progress-container">
-    <div *ngFor="let status of statuses; let i = index" class="status-item">
-      <div [ngClass]="getCircleClass(i)" class="status-circle">
-        <i class="fas" [ngClass]="status.icon"></i>
-      </div>
-      <span class="status-label">{{ status.status }}</span>
-      <div *ngIf="i < statuses.length - 1" class="connector"></div>
+  <div *ngFor="let status of statuses; let i = index" class="status-item">
+    <div [ngClass]="getCircleClass(i)" class="status-circle">
+      <i class="fas" [ngClass]="status.icon"></i>
     </div>
+    <span class="status-label">{{ status.status }}</span>
+    <div *ngIf="i < statuses.length - 1" class="connector"></div>
   </div>
-  
+</div>
