@@ -34,6 +34,10 @@
   word-break: break-word;
 }
 
+.img_produto:hover{
+  max-width: 105% !important;
+  cursor: pointer;
+}
 @media (max-width: 768px) {
   #produto-info {
     margin-top: 20px;
@@ -64,6 +68,7 @@
   p {
     margin-bottom: 2px;
   }
+
 
   #data_hora::before {
     content: "Data/Hora: ";

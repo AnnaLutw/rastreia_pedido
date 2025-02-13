@@ -21,8 +21,11 @@ export class StatusComponent {
 
   
   getCurrentStatusIndex(): number {
-    const currentStatus = this.pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array[0]?.shipment_order_volume_state_localized;
-
+     
+    let currentStatus = this.pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array[0]?.shipment_order_volume_state_localized;
+    if (currentStatus == 'Averiguar falha na entrega'){
+      currentStatus = 'Saiu para entrega';
+    }
     const index = this.statuses.findIndex(s => s.status.toLowerCase() === currentStatus?.toLowerCase());
   
     return index !== -1 ? index : 0; 

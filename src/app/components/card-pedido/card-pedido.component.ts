@@ -15,7 +15,7 @@ export class CardPedidoComponent {
  transportadoras = [
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/3288.png', name: 'jadlog'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/19785.png', name: 'favorita'},
-  {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/18812.png', name: 'frontlog'},
+  {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/18812.png', name: 'front'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/19158.png', name: 'dominalog'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/18587.png', name: 'brasil web'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/572.png', name: 'jamef'},
