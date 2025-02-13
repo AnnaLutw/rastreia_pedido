@@ -1,13 +1,11 @@
-<div class="mb-3 row justify-content-center ">
+<div class="mb-3 row justify-content-center">
   <label for="document" class="form-label">Digite seu CPF/CNPJ</label>
   <div id="input_session" class="row col-lg-6 col-12">
     <input 
+      #documentInput
       type="text" 
       class="form-control col-lg-9 col-12" 
       id="document" 
-      [(ngModel)]="documento"
-      [mask]="mask"
-      (ngModelChange)="onChangeDocumento()"
     >
     <button (click)="onSubmit()" class="btn btn-primary col-lg-2 col-12">Enviar</button>
   </div>

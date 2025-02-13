@@ -1,50 +1,63 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { PedidoService } from '../../pedido.service';
+import IMask from 'imask';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { provideNgxMask, NgxMaskDirective } from 'ngx-mask';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [CommonModule, FormsModule, NgxMaskDirective, ModalComponent], 
-  providers: [provideNgxMask()],
+  imports: [CommonModule, FormsModule, ModalComponent], 
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.css']
 })
-export class InputComponent  {
-  @ViewChild(ModalComponent) modal!: ModalComponent; // Referência ao modal
+export class InputComponent implements AfterViewInit {
+  @ViewChild(ModalComponent) modal!: ModalComponent;
+  @ViewChild('documentInput', { static: false }) documentInput!: ElementRef;
 
   documento: string = '';
-  mask: string = '000.000.000-00';
+  maskInstance: any;
 
-  constructor(private apiService: ApiService, private pedidoService: PedidoService) {}
-
+  constructor(private apiService: ApiService, private pedidoService: PedidoService, private renderer: Renderer2) {}
 
   ngAfterViewInit() {
     if (!this.modal) {
       console.error('O ModalComponent não foi encontrado no ViewChild.');
     }
-  }
-  
-  onChangeDocumento() {
-    const cleanValue = this.documento.replace(/\D/g, '');
-    this.mask = cleanValue.length > 11 ? '00.000.000/0000-00' : '000.000.000-00';
-    this.documento = cleanValue;
+
+    this.inicializarMascara();
   }
 
-  formatarDocumento(): string {
-    let cleanValue = this.documento.replace(/\D/g, '');
-    return cleanValue.length <= 11
-      ? cleanValue.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4')
-      : cleanValue.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, '$1.$2.$3/$4-$5');
+  inicializarMascara() {
+    if (this.documentInput) {
+      this.maskInstance = IMask(this.documentInput.nativeElement, {
+        mask: [
+          {
+            mask: '000.000.000-00',
+            lazy: false,
+          },
+          {
+            mask: '00.000.000/0000-00',
+            lazy: false,
+          }
+        ],
+        dispatch: (appended, dynamicMasked) => {
+          const value = (dynamicMasked.value + appended).replace(/\D/g, '');
+          return value.length > 11 ? dynamicMasked.compiledMasks[1] : dynamicMasked.compiledMasks[0];
+        }
+      });
+
+      this.maskInstance.on('accept', () => {
+        this.documento = this.maskInstance.unmaskedValue; // Valor sem máscara
+      });
+    }
   }
 
   onSubmit() {
     if (this.documento) {
-      const formattedDocumento = this.formatarDocumento();
+      const formattedDocumento = this.documento.replace(/\D/g, ''); // Remove tudo que não for número
       this.apiService.enviarCpfCnpj(formattedDocumento).subscribe(
         response => {
           this.pedidoService.atualizarPedidos(response);

@@ -22,6 +22,7 @@ export class CardPedidoComponent {
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/1419.png', name: 'luz'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/18584.png', name: 'mma'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/10848.png', name: 'pajuçara'},
+  {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/112.png', name: 'movvi'},
  ]
 
 

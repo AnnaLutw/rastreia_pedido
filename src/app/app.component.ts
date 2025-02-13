@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet, ActivatedRoute } from '@angular/router';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { FooterComponent } from "./components/footer/footer.component";
-import { BlocoUmComponent } from "./components/bloco-um/bloco-um.component";
 import { CardPedidoComponent } from "./components/card-pedido/card-pedido.component";
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -15,7 +14,6 @@ import { PedidoService } from './pedido.service';
     NavbarComponent,
     FooterComponent,
     RouterOutlet,
-    BlocoUmComponent,
     CardPedidoComponent,
     CommonModule,
     HttpClientModule

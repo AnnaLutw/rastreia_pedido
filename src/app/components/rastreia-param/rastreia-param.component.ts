@@ -3,10 +3,9 @@ import { RouterModule } from '@angular/router';
 import { PedidoService } from '../../pedido.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../api.service';
-import { CardPedidoComponent } from '../card-pedido/card-pedido.component';
 @Component({
   selector: 'app-rastreia-param',
-  imports: [RouterModule, CardPedidoComponent],
+  imports: [RouterModule],
   templateUrl: './rastreia-param.component.html',
   styleUrl: './rastreia-param.component.css'
 })
