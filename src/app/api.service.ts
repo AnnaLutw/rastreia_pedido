@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, forkJoin, throwError } from 'rxjs';
 import { tap, map, switchMap, catchError, finalize } from 'rxjs/operators';
-import { environment } from '../environments/environment';
-
+// import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.dynamic';
 @Injectable({
   providedIn: 'root'
 })
