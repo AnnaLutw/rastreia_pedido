@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, forkJoin, throwError } from 'rxjs';
 import { tap, map, switchMap, catchError, finalize } from 'rxjs/operators';
-import { environment } from '../environment'; // Certifique-se que o caminho está correto
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +15,7 @@ export class ApiService {
 
   // Primeira requisição: buscar pedidos pelo CPF/CNPJ
   enviarCpfCnpj(documento: string): Observable<any> {
-    const spinner = document.getElementById('spinner')
-    spinner?.classList.remove('d-none')
-
-    const card = document.getElementById('card-pedidos')
-    card?.classList.add('d-none')
+    
 
     const url = `http://localhost:3000/api/pedido/${documento}`;
 
@@ -53,10 +49,6 @@ export class ApiService {
       catchError(error => {
         console.error('Erro na requisição:', error);
         return throwError(() => error);
-      }),
-      finalize(()=>{
-        spinner?.classList.add('d-none')
-        card?.classList.remove('d-none')
       })
 
     );

@@ -31,9 +31,19 @@ export class RastreiaParamComponent  implements OnInit {
   }
 
   buscarPedido(pedido: string) {
+    const spinner = document.getElementById('spinner')
+    spinner?.classList.remove('d-none')
+
+    const card = document.getElementById('card-pedidos')
+    card?.classList.add('d-none')
+
     this.apiService.enviarCpfCnpj(pedido).subscribe({
       next: (response) => {
         this.pedidoService.atualizarPedidos(response);
+        
+        spinner?.classList.add('d-none')
+        card?.classList.remove('d-none')
+
       },
       error: (err) => {
         console.error('Erro ao coletar pedidos:', err);

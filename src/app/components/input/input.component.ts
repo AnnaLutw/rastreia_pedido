@@ -57,10 +57,22 @@ export class InputComponent implements AfterViewInit {
 
   onSubmit() {
     if (this.documento) {
+
+      const spinner = document.getElementById('spinner')
+      spinner?.classList.remove('d-none')
+
+      const card = document.getElementById('card-pedidos')
+      card?.classList.add('d-none')
+
+
       const formattedDocumento = this.documento.replace(/\D/g, ''); // Remove tudo que não for número
       this.apiService.enviarCpfCnpj(formattedDocumento).subscribe(
         response => {
           this.pedidoService.atualizarPedidos(response);
+
+          spinner?.classList.add('d-none')
+          card?.classList.remove('d-none')
+
         },
         error => {
           if (this.modal) {
