@@ -1,22 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, forkJoin, throwError } from 'rxjs';
-import { tap, map, switchMap, catchError, finalize } from 'rxjs/operators';
-// import { environment } from '../environments/environment';
-import { environment } from '../environments/environment.dynamic';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   
-  private readonly API_KEY = environment.apiKey; // Obtendo do environment
-
   constructor(private http: HttpClient) {}
 
-  // Primeira requisição: buscar pedidos pelo CPF/CNPJ
+  // Buscar pedidos pelo CPF/CNPJ sem chamar a Intelipost
   enviarCpfCnpj(documento: string): Observable<any> {
-    
-
     const url = `http://localhost:3000/api/pedido/${documento}`;
 
     return this.http.get<{ pedidos: { chavenfe: string; 
@@ -24,42 +19,14 @@ export class ApiService {
                                       data_emissao: string; 
                                       transportadora_ecommerce: string, 
                                       id_nr_nf: string,
-                                      descricao_reduzida : string
-                                      imagem1 : string,
-                                      codigo_rastreio: string }[] 
+                                      descricao_reduzida: string,
+                                      imagem1: string,
+                                      codigo_rastreio: string 
+                                    }[] 
                           }>(url).pipe(
-      switchMap(response => {
-        const pedidos = response.pedidos; 
-        
-        if (!pedidos || pedidos.length === 0) {
-          return throwError(() => new Error('Nenhum pedido encontrado.'));
-        }
-
-        const requests = pedidos.map(pedido =>
-          this.coletaPedidos(pedido.codigo_rastreio).pipe(
-            map(trackingInfo => ({
-              ...pedido, // Mantém os dados originais do pedido
-              trackingInfo // Adiciona os dados da segunda requisição
-            }))
-          )
-        );
-
-        return forkJoin(requests); // Faz todas as requisições em paralelo
-      }),
+      map(response => response.pedidos || []), // Retorna apenas os pedidos
       catchError(error => {
         console.error('Erro na requisição:', error);
-        return throwError(() => error);
-      })
-
-    );
-  }
-
-  coletaPedidos(pedido: string): Observable<any> {
-    const urlPedidos = `https://api.intelipost.com.br/api/v1/shipment_order/${pedido}`;
-    const headers = new HttpHeaders({ 'api-key': this.API_KEY });
-
-    return this.http.get(urlPedidos, { headers }).pipe(
-      catchError(error => {
         return throwError(() => error);
       })
     );
