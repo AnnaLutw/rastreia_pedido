@@ -4,11 +4,12 @@ import { RastreiaParamComponent } from './components/rastreia-param/rastreia-par
 import { RastreiaInputComponent } from './components/rastreia-input/rastreia-input.component';
 
 export const routes: Routes = [
-  // Agora a rota inicial é '' (vazia) pois o base href já é /rastreio/
+  { path: '', component: RastreiaInputComponent },
   { path: 'rastreio', component: RastreiaInputComponent },
-  { path: 'rastreio/:pedido', component: RastreiaParamComponent, data: { prerender: false } },
-  { path: '**', redirectTo: '', pathMatch: 'full' }
+  { path: 'rastreio/:pedido', component: RastreiaParamComponent },
+  { path: '**', redirectTo: 'rastreio', pathMatch: 'full' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: false, scrollPositionRestoration: 'enabled' })],

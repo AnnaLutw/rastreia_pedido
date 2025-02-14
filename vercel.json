@@ -1,0 +1,10 @@
+{
+    "routes": [
+      { "src": "/rastreio/(.*)", "dest": "/rastreio/index.html" }
+    ],
+    "rewrites": [
+      { "source": "/rastreio", "destination": "/rastreio/index.html" },
+      { "source": "/rastreio/:pedido", "destination": "/rastreio/index.html" }
+    ]
+  }
+  
