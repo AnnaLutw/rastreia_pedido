@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-           "outputPath": "./dist/rastreia-pedido",
+           "outputPath": "/dist/rastreia-pedido",
             "deployUrl": "/",
             "baseHref": "/",
             "index": "src/index.html",
@@ -59,6 +59,31 @@
             }
           },
           "defaultConfiguration": "production"
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/rastreia-pedido-server",
+            "main": "src/main.server.ts",
+            "tsConfig": "tsconfig.app.json"
+          }
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "options": {
+            "browserTarget": "rastreia-pedido:build",
+            "serverTarget": "rastreia-pedido:server"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "rastreia-pedido:build:production",
+              "serverTarget": "rastreia-pedido:server:production"
+            },
+            "development": {
+              "browserTarget": "rastreia-pedido:build:development",
+              "serverTarget": "rastreia-pedido:server:development"
+            }
+          }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
