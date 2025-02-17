@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-           "outputPath": "/dist/rastreia-pedido",
+           "outputPath": "dist/rastreia-pedido",
             "deployUrl": "/",
             "baseHref": "/",
             "index": "src/index.html",
