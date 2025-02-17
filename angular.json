@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rastreia-pedido": {
+    "rastreia-pedido": {  
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/rastreia_pedido",
+            "outputPath": "dist/rastreia-pedido",  
             "deployUrl": "/",
             "baseHref": "/",
             "index": "src/index.html",
@@ -68,10 +68,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "rastreia_pedido:build:production"
+              "buildTarget": "rastreia-pedido:build:production" 
             },
             "development": {
-              "buildTarget": "rastreia_pedido:build:development"
+              "buildTarget": "rastreia-pedido:build:development" 
             }
           },
           "defaultConfiguration": "development"
