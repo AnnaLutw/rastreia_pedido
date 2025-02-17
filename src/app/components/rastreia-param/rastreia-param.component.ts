@@ -1,22 +1,24 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { PedidoService } from '../../pedido.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../api.service';
+import { isPlatformBrowser } from '@angular/common';
+
 @Component({
   selector: 'app-rastreia-param',
   imports: [RouterModule],
   templateUrl: './rastreia-param.component.html',
   styleUrl: './rastreia-param.component.css'
 })
-
-export class RastreiaParamComponent  implements OnInit {
+export class RastreiaParamComponent implements OnInit {
   pedido: string | null = null; // 🔹 Variável para armazenar o pedido vindo da URL
 
   constructor(
     private route: ActivatedRoute, 
     private apiService: ApiService,
-    private pedidoService: PedidoService
+    private pedidoService: PedidoService,
+    @Inject(PLATFORM_ID) private platformId: Object // 🔹 Injeta a plataforma
   ) {}
 
   ngOnInit(): void {
@@ -31,24 +33,25 @@ export class RastreiaParamComponent  implements OnInit {
   }
 
   buscarPedido(pedido: string) {
-    const spinner = document.getElementById('spinner')
-    spinner?.classList.remove('d-none')
+    if (isPlatformBrowser(this.platformId)) { // 🔹 Garante que só acessa `document` no navegador
+      const spinner = document.getElementById('spinner');
+      const card = document.getElementById('card-pedidos');
 
-    const card = document.getElementById('card-pedidos')
-    card?.classList.add('d-none')
+      spinner?.classList.remove('d-none');
+      card?.classList.add('d-none');
 
-    this.apiService.enviarCpfCnpj(pedido).subscribe({
-      next: (response) => {
-        this.pedidoService.atualizarPedidos(response);
-        
-        spinner?.classList.add('d-none')
-        card?.classList.remove('d-none')
-
-      },
-      error: (err) => {
-        console.error('Erro ao coletar pedidos:', err);
-      }
-    });
+      this.apiService.enviarCpfCnpj(pedido).subscribe({
+        next: (response) => {
+          this.pedidoService.atualizarPedidos(response);
+        },
+        error: (err) => {
+          console.error('Erro ao coletar pedidos:', err);
+        },
+        complete: () => { // 🔹 Substitui `always` por `complete`
+          spinner?.classList.add('d-none');
+          card?.classList.remove('d-none');
+        }
+      });
+    }
   }
-
 }

@@ -3,14 +3,14 @@ import { RenderMode, ServerRoute } from '@angular/ssr';
 export const serverRoutes: ServerRoute[] = [
   {
     path: 'rastreio',
-    renderMode: RenderMode.Server, // Renderiza dinamicamente no servidor
+    renderMode: RenderMode.Server, // Página principal
   },
   {
     path: 'rastreio/:pedido',
-    renderMode: RenderMode.Server, // Pode ser Server, pois recebe parâmetros dinâmicos
+    renderMode: RenderMode.Server, // Com parâmetro dinâmico
   },
   {
     path: '**',
-    renderMode: RenderMode.Prerender, // Prerender para todas as outras rotas
+    renderMode: RenderMode.Server, // Para capturar qualquer outra rota
   }
 ];

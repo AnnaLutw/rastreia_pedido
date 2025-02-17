@@ -33,21 +33,26 @@ app.use(
   express.static(browserDistFolder, {
     maxAge: '1y',
     index: false,
-    redirect: false,
   }),
 );
 
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.use('/**', (req, res, next) => {
-  angularApp
-    .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
-    .catch(next);
+app.use('*', async (req, res, next) => {
+  try {
+    const response = await angularApp.handle(req);
+    if (response) {
+      writeResponseToNodeResponse(response, res);
+    } else {
+      res.sendFile(resolve(browserDistFolder, 'index.html'));
+    }
+  } catch (error) {
+    next(error);
+  }
 });
+
+
 
 /**
  * Start the server if this module is the main entry point.

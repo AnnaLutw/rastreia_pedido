@@ -12,7 +12,7 @@ export class ApiService {
 
   // Buscar pedidos pelo CPF/CNPJ sem chamar a Intelipost
   enviarCpfCnpj(documento: string): Observable<any> {
-    const url = `http://localhost:3000/api/pedido/${documento}`;
+    const url = `https://rastreiofidback-production.up.railway.app/api/pedido/${documento}`;
 
     return this.http.get<{ pedidos: { chavenfe: string; 
                                       marketplace_pedido: string; 
