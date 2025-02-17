@@ -102,10 +102,10 @@
       }
     }
   },
-  "cli": {
-    "analytics": false,
-    "cache": {
-      "enabled": true
-    }
+ "cli": {
+  "analytics": false,
+  "cache": {
+    "enabled": true
   }
+}
 }
