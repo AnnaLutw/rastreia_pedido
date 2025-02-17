@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "node dist/rastreia_pedido/server/server.mjs",
-    "build": "ng build --configuration=production && ng run rastreia-pedido:server",
-    "postinstall": "ng build --configuration=production && ng run rastreia-pedido:server",
+    "build": "ng build --configuration=production && ng run rastreia_pedido:server",
+    "postinstall": "ng build --configuration=production && ng run rastreia_pedido:server",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:rastreia_pedido": "node dist/rastreia_pedido/server/server.mjs"
