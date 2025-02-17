@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rastreia_pedido": {
+    "rastreia-pedido": {
       "projectType": "application",
       "schematics": {},
       "root": "",
