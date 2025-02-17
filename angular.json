@@ -64,7 +64,7 @@
           "builder": "@angular-devkit/build-angular:server",
           "options": {
             "outputPath": "dist/rastreia-pedido-server",
-            "main": "src/main.server.ts",
+            "main": "src/server.ts",
             "tsConfig": "tsconfig.app.json"
           }
         },
