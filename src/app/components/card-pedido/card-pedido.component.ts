@@ -23,6 +23,7 @@ export class CardPedidoComponent {
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/18584.png', name: 'mma'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/10848.png', name: 'pajuçara'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/112.png', name: 'movvi'},
+  {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/17813.png', name: 'rvr'},
  ]
 
 
@@ -49,6 +50,11 @@ export class CardPedidoComponent {
     return transportadora ? transportadora.icon : 'URL_PADRAO_AQUI';
   }
   
+  isValidDate(dateString: string | null | undefined): boolean {
+    if (!dateString) return false;
+    const date = new Date(dateString);
+    return !isNaN(date.getTime());
+  }
   
   
 }
