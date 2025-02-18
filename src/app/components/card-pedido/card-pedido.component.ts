@@ -56,5 +56,11 @@ export class CardPedidoComponent {
     return !isNaN(date.getTime());
   }
   
+  formatDate(dateString: string): string {
+    if (!dateString) return '';
+    let fixedDateString = dateString.replace(/([-+]\d{2}):(\d{2}):(\d{2})/, '$1:$2');
+    return new Date(fixedDateString).toISOString();
+  }
+  
   
 }
