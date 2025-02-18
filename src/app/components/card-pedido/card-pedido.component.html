@@ -9,6 +9,7 @@
       <!-- Informações do Pedido -->
       <div class="col-lg-5 col-12 mb-3">
         <p class="previsao"><strong>Previsão de Entrega:</strong> {{ pedido?.trackingInfo?.content?.estimated_delivery_date_iso | date:'dd/MM/yyyy' }}</p>
+        <p ><strong>Data pedido</strong> {{ pedido?.data_emissao | date:'dd/MM/yyyy' }}</p>
         <p><strong>Plataforma:</strong> {{ pedido?.trackingInfo?.content?.sales_channel }}</p>
         <p><strong>Entregar para:</strong> {{ pedido?.trackingInfo?.content?.end_customer?.first_name }} {{ pedido?.trackingInfo?.content?.end_customer?.last_name }}</p>
         <p><strong>Endereço:</strong> {{ pedido?.trackingInfo?.content?.end_customer?.shipping_address }}, {{ pedido?.trackingInfo?.content?.end_customer?.shipping_city }} - {{ pedido?.trackingInfo?.content?.end_customer?.shipping_state_code }}</p>
@@ -18,6 +19,8 @@
       <div class="col-lg-2 col-12 text-center mb-3">
         <p><strong>Entregue por:</strong></p>
         <img width="100" [src]="getTransportadoraLogo()" alt="Imagem da transportadora" class="rounded shadow-sm" />
+        <p>{{ pedido?.trackingInfo?.content?.delivery_method_name }}</p>
+
       </div>
       
       <!-- Produtos -->

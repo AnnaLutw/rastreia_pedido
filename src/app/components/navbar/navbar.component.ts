@@ -9,4 +9,7 @@ import { Component } from '@angular/core';
 })
 export class NavbarComponent {
 
+  visitaLoja() {
+    window.location.href = 'https://www.fidcomex.com.br';
+  }
 }
