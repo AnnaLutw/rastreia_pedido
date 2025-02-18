@@ -24,6 +24,7 @@ export class CardPedidoComponent {
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/10848.png', name: 'pajuçara'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/112.png', name: 'movvi'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/17813.png', name: 'rvr'},
+  {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/16855.png', name: 'logcol'},
  ]
 
 
@@ -55,7 +56,7 @@ export class CardPedidoComponent {
     const date = new Date(dateString);
     return !isNaN(date.getTime());
   }
-  
+
   formatDate(dateString: string): string {
     if (!dateString) return '';
     let fixedDateString = dateString.replace(/([-+]\d{2}):(\d{2}):(\d{2})/, '$1:$2');
