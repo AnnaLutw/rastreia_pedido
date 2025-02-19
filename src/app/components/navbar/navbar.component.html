@@ -1,7 +1,15 @@
 <nav class="navbar">
   <img src="assets/images/logo_small.png" width="60" alt="Logo do meu app">
-  
-  <button id="btn-loja" type="button" (click)="visitaLoja()" class="btn btn-outline-light">
-    Visite nossa loja
-  </button>
+  <div>
+    <button id="btn-insta" type="button" (click)="visitaLoja('https://www.instagram.com/fidcomex/')" class="me-2 btn btn-outline-light">
+    <img src="assets/images/logo insta.png"  width="20">
+
+      Siga no insta
+    </button>
+
+    <button id="btn-loja" type="button" (click)="visitaLoja('https://www.fidcomex.com.br')" class="btn btn-outline-light">
+      Visite nossa loja
+    </button>
+  </div>
+
 </nav>
