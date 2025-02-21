@@ -3,16 +3,16 @@ import { RouterModule } from '@angular/router';
 import { PedidoService } from '../../pedido.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../api.service';
-import { isPlatformBrowser } from '@angular/common';
-
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 @Component({
   selector: 'app-rastreia-param',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './rastreia-param.component.html',
   styleUrl: './rastreia-param.component.css'
 })
 export class RastreiaParamComponent implements OnInit {
   pedido: string | null = null; // 🔹 Variável para armazenar o pedido vindo da URL
+  mostrarModal: boolean = false;
 
   constructor(
     private route: ActivatedRoute, 
@@ -25,11 +25,16 @@ export class RastreiaParamComponent implements OnInit {
     this.route.params.subscribe(params => {
       const pedidoUrl = params['pedido']?.trim();
 
+
       if (pedidoUrl) { // 🔹 Só busca se houver um pedido válido na URL
         this.pedido = pedidoUrl; // Guarda o valor da URL
         this.buscarPedido(pedidoUrl);
       }
     });
+  }
+
+  fecharModal() {
+    this.mostrarModal = false;
   }
 
   buscarPedido(pedido: string) {
@@ -43,6 +48,8 @@ export class RastreiaParamComponent implements OnInit {
       this.apiService.enviarCpfCnpj(pedido).subscribe({
         next: (response) => {
           this.pedidoService.atualizarPedidos(response);
+          this.mostrarModal = true; 
+        
         },
         error: (err) => {
           console.error('Erro ao coletar pedidos:', err);
