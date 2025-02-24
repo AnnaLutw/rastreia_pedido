@@ -58,27 +58,29 @@
           </div>
         
           <div *ngIf="pedido?.trackingInfo?.content?.shipment_order_volume_array?.[0]?.shipment_order_volume_state_history_array?.length > 0; else noData">
-            <div *ngFor="let status of pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array" 
-                 class="row p-2 border-bottom">
-              
+            <div *ngFor="let status of pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array; let i = index" 
+                 class="row p-2 border-bottom"
+                 [hidden]="i > 0 && (status?.created_iso | date:'dd/MM/yyyy') === (pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array[i-1]?.created_iso | date:'dd/MM/yyyy') && status?.shipment_volume_micro_state?.description === pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array[i-1]?.shipment_volume_micro_state?.description">
+          
               <div class="col-lg-3 col-12" id="data_hora">
                 {{ status?.created_iso ? (status.created_iso | date:'dd/MM/yyyy HH:mm') : 'Sem data' }}
               </div>
-              
+          
               <div class="col-lg-3 col-12" id="status">
                 {{ status?.shipment_order_volume_state_localized || 'Sem status' }}
               </div>
-              
+          
               <div class="col-lg-3 col-12" id="detalhes">
-                - {{ status?.shipment_volume_micro_state?.description?.replace('Aguarde os demais status de rastreamento.', '')|| 'Sem detalhes' }}
+                - {{ status?.shipment_volume_micro_state?.description?.replace('Aguarde os demais status de rastreamento.', '') || 'Sem detalhes' }}
               </div>
-              
+          
               <div class="col-lg-3 col-12" id="obs">
                 {{ status?.extra?.[0]?.freeText?.replace('(SSWMOBILE)', '') || 'Sem observação' }}
               </div>
-              
+          
             </div>
           </div>
+          
         
           <ng-template #noData>
             <div class="row p-2">
