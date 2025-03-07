@@ -15,14 +15,23 @@
   
   .modal-content {
     background: white;
-    padding: 20px;
+    padding: 2px;
     border-radius: 8px;
     text-align: center;
   }
   
 .modal-nao-encontrou{
-    width: 43% !important;
+    width: 70% !important;
 }
+
+.modal-content img {
+    max-width: 100%; /* 🔹 Garante que a imagem não ultrapasse o modal */
+    height: auto; /* 🔹 Mantém a proporção */
+    display: block; /* 🔹 Remove espaços extras abaixo da imagem */
+    margin: 0 auto; /* 🔹 Centraliza a imagem */
+  }
+
+  
 @media (max-width: 768px) {
     #input_session{
         min-width: 90%;
