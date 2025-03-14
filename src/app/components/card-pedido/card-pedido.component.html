@@ -57,7 +57,7 @@
             <div class="col-lg-3">Observação</div>
           </div>
         
-          <div *ngIf="pedido?.trackingInfo?.content?.shipment_order_volume_array?.[0]?.shipment_order_volume_state_history_array?.length > 0; else noData">
+          <div class="text-start text-md-center"  *ngIf="pedido?.trackingInfo?.content?.shipment_order_volume_array?.[0]?.shipment_order_volume_state_history_array?.length > 0; else noData">
             <div *ngFor="let status of pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array; let i = index" 
                  class="row p-2 border-bottom"
                  [hidden]="i > 0 && (status?.created_iso | date:'dd/MM/yyyy') === (pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array[i-1]?.created_iso | date:'dd/MM/yyyy') && status?.shipment_volume_micro_state?.description === pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array[i-1]?.shipment_volume_micro_state?.description">
