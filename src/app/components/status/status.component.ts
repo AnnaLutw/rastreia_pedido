@@ -26,7 +26,7 @@ export class StatusComponent {
     let currentDetalhe = this.pedido?.trackingInfo?.content?.shipment_order_volume_array[0]?.shipment_order_volume_state_history_array[0]?.shipment_volume_micro_state.default_name;
     if (currentStatus == 'Averiguar falha na entrega' && currentDetalhe == 'PROBLEMA OPERACIONAL'){
       currentStatus = 'Em trânsito';
-    }else{
+    }else if(currentStatus == 'Averiguar falha na entrega'){
       currentStatus = 'Saiu para entrega';
     }
     const index = this.statuses.findIndex(s => s.status.toLowerCase() === currentStatus?.toLowerCase());
