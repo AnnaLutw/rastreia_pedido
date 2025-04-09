@@ -59,11 +59,26 @@ export class CardPedidoComponent {
     return !isNaN(date.getTime());
   }
 
-  formatDate(dateString: string): string {
+  formatDate(dateString: string, portal: string): string {
     if (!dateString) return '';
-    let fixedDateString = dateString.replace(/([-+]\d{2}):(\d{2}):(\d{2})/, '$1:$2');
-    return new Date(fixedDateString).toISOString();
+  
+    let date = new Date(dateString);
+  
+    if (isNaN(date.getTime())) return ''; // Verifica se é uma data válida
+    // Se for da Leroy, só muda o formato para 'dd/MM/yyyy'
+    if (portal === 'Leroy Merlin') {
+
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Mês começa do 0
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+  
+    // Para outros portais, retorna ISO normal
+    return date.toISOString();
   }
+  
+  
   
   
 }

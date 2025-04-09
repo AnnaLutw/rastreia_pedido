@@ -9,7 +9,7 @@
       <!-- Informações do Pedido -->
       <div class="col-lg-5 col-12 mb-3">
         <p ><strong>Data pedido</strong> {{ pedido?.data_emissao | date:'dd/MM/yyyy' }}</p>
-        <p class="previsao"><strong>Previsão de Entrega:</strong> {{ formatDate(pedido?.trackingInfo?.content?.estimated_delivery_date_iso) | date:'dd/MM/yyyy' }} </p>
+        <p class="previsao"><strong>Previsão de Entrega:</strong> {{ formatDate(pedido?.trackingInfo?.content?.estimated_delivery_date_iso, pedido?.portal) | date:'dd/MM/yyyy' }} </p>
         <p><strong>Plataforma:</strong> {{ pedido?.portal != '' ? pedido?.portal : pedido?.trackingInfo?.content?.sales_channel }}</p>
         <p><strong>Entregar para:</strong> {{ pedido?.trackingInfo?.content?.end_customer?.first_name }} {{ pedido?.trackingInfo?.content?.end_customer?.last_name }}</p>
         <p><strong>Endereço:</strong> {{ pedido?.trackingInfo?.content?.end_customer?.shipping_address }}, {{ pedido?.trackingInfo?.content?.end_customer?.shipping_city }} - {{ pedido?.trackingInfo?.content?.end_customer?.shipping_state_code }}</p>
