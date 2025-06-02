@@ -27,6 +27,7 @@ export class CardPedidoComponent {
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/16855.png', name: 'convencional'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/4.png', name: 'total'},
   {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/2.png', name: 'sedex'},
+  {icon : 'https://s3-sa-east-1.amazonaws.com/intelipost-assets/images/delivery_method/15817.png', name: 'translog'},
  ]
 
 
