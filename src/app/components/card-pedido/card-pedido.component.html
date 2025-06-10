@@ -71,7 +71,7 @@
               </div>
           
               <div class="col-lg-3 col-12" id="detalhes">
-                - {{ status?.shipment_volume_micro_state?.description?.replace('Aguarde os demais status de rastreamento.', '') || 'Sem detalhes' }}
+                - {{ status?.shipment_volume_micro_state?.description?.replace('Aguarde os demais status de rastreamento.', '') || 'Sem detalhes' }} / {{status?.provider_message}}
               </div>
           
               <div class="col-lg-3 col-12" id="obs">
